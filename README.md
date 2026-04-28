@@ -2,6 +2,12 @@
 
 - unset `single-process` flag for non-headless mode which crashes all the time on macOS
 
+# Installation
+
+```bash
+export GOPATH=/Users/dima/Developer/go && go build -o rodney . && mv rodney ~/.local/bin/
+```
+
 # Original README
 
 # Rodney: Chrome automation from the command line
