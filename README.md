@@ -1,3 +1,9 @@
+# Fork changes
+
+- unset `single-process` flag for non-headless mode which crashes all the time on macOS
+
+# Original README
+
 # Rodney: Chrome automation from the command line
 
 [![PyPI](https://img.shields.io/pypi/v/rodney.svg)](https://pypi.org/project/rodney/)

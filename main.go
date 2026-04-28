@@ -377,10 +377,18 @@ func cmdStart(args []string) {
 	l := launcher.New().
 		Set("no-sandbox").
 		Set("disable-gpu").
-		Set("single-process"). // Required for screenshots in gVisor/container environments
-		Leakless(false).        // Keep Chrome alive after CLI exits
+		Leakless(false). // Keep Chrome alive after CLI exits
 		UserDataDir(dataDir).
 		Headless(headless)
+
+	// --single-process is required for screenshots in gVisor/container
+	// environments, but it is officially unsupported by Chromium and is
+	// extremely crash-prone with a visible window (especially on recent
+	// macOS, where it dies in NSKeyValueObserver/CFPreferences). Only enable
+	// it in headless mode.
+	if headless {
+		l = l.Set("single-process")
+	}
 
 	// When in non-headless mode, make sure that we show the startup window immediately
 	// (instead of showing a window only after calling "rodney open")
